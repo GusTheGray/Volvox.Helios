@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Volvox.Helios.Service.Clients
 {
-    public class DiscordAPIClient
+    public class DiscordAPIClient : IDiscordAPIClient
     {
         private readonly HttpClient _client;
         private readonly IHttpContextAccessor _context;
@@ -16,9 +16,14 @@ namespace Volvox.Helios.Service.Clients
 
         public DiscordAPIClient(HttpClient client, IHttpContextAccessor context, IConfiguration configuration)
         {
-            _client = client;
             _context = context;
             _configuration = configuration;
+
+            client.BaseAddress = new Uri("https://discordapp.com/api/");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.DefaultRequestHeaders.Add("User-Agent", "Volvox.Helios");
+            _client = client;
+
 
             // Set access token.
             var accessToken = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "access_token")?.Value;

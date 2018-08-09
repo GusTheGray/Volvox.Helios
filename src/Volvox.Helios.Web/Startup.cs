@@ -111,12 +111,7 @@ namespace Volvox.Helios.Web
             services.AddSingleton<IList<IModule>>(s => s.GetServices<IModule>().ToList());
 
             // HTTP Clients
-            services.AddHttpClient<DiscordAPIClient>(options =>
-            {
-                options.BaseAddress = new Uri("https://discordapp.com/api/");
-                options.DefaultRequestHeaders.Add("Accept", "application/json");
-                options.DefaultRequestHeaders.Add("User-Agent", "Volvox.Helios");
-            });
+            services.AddHttpClient<IDiscordAPIClient, DiscordAPIClient>();
 
             // Discord Services
             services.AddScoped<IDiscordUserGuildService, DiscordUserGuildService>();

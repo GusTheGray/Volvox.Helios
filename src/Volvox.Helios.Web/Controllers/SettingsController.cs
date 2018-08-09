@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Volvox.Helios.Core.Bot;
 using Volvox.Helios.Domain.ModuleSettings;
+using Volvox.Helios.Service.Clients;
 using Volvox.Helios.Service.Discord.Guild;
 using Volvox.Helios.Service.Discord.User;
 using Volvox.Helios.Service.Extensions;
@@ -17,9 +18,14 @@ namespace Volvox.Helios.Web.Controllers
     public class SettingsController : Controller
     {
         private readonly IModuleSettingsService<StreamAnnouncerSettings> _streamAnnouncerSettingsService;
+        private readonly IDiscordAPIClient _discordAPIClient;
 
-        public SettingsController(IModuleSettingsService<StreamAnnouncerSettings> streamAnnouncerSettingsService)
+        public SettingsController(
+            IModuleSettingsService<StreamAnnouncerSettings> streamAnnouncerSettingsService,
+            IDiscordAPIClient discordAPIClient
+            )
         {
+            _discordAPIClient = discordAPIClient;
             _streamAnnouncerSettingsService = streamAnnouncerSettingsService;
         }
 
