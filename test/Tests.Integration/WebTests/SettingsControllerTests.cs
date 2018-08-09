@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +21,10 @@ namespace Tests.Integration.WebTests
         [Fact]
         public async Task Get_Settings()
         {
-            var client = _webApplicationFactory.CreateClient();
+            var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
 
             var respsonse = await client.GetAsync("/Settings");
 
