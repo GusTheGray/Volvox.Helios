@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Tests.Integration.Infrastructure;
 using Xunit;
 
 namespace Tests.Integration.WebTests
@@ -18,6 +19,7 @@ namespace Tests.Integration.WebTests
         {
             _webApplicationFactory = webApplicationFactory;
         }
+
 
         /// <summary>
         /// Quick Test against / to ensure 200 OK unauthed

@@ -23,6 +23,11 @@ namespace Tests.Integration.Infrastructure
                 .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
+                services.AddAuthentication(options =>
+                {
+
+                });
+
                 services.AddDbContext<VolvoxHeliosContext>(options =>
                 {
                     options.UseInMemoryDatabase("HeliosInMemory");

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Tests.Integration.Infrastructure;
 using Volvox.Helios.Domain.Discord;
 using Volvox.Helios.Service.Extensions;
 using Xunit;
@@ -12,6 +14,14 @@ namespace Tests.Unit.Volvox.Helios.Service
     {
         private const int AdminPermission = 0x00000008;
         private const int NotAdminPermission = 0x00000000;
+
+        [Fact]
+        public async Task TestToken()
+        {
+            var auth = new DiscordClientCredAuth();
+            var result = await auth.GetToken();
+            Assert.False(string.IsNullOrEmpty(result));
+        }
 
         /// <summary>
         /// Sample Test
