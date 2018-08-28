@@ -11,11 +11,9 @@ namespace Tests.Integration.Infrastructure.TestAuthentication
     {
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            var authenticationTicket = new AuthenticationTicket(
-                new ClaimsPrincipal(Options.Identity),
-                new AuthenticationProperties());
+            var authenticationTicket = new AuthenticationTicket()
 
-            return Task.FromResult(AuthenticateResult.Success(authenticationTicket));
+            return Task.FromResult(AuthenticateResult.Success());
         }
     }
 }

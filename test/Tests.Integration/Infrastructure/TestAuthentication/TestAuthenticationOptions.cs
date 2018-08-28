@@ -10,6 +10,7 @@ namespace Tests.Integration.Infrastructure.TestAuthentication
     {
         public TestAuthenticationOptions()
         {
+            
         }
         public virtual ClaimsIdentity Identity { get; } = new ClaimsIdentity(new Claim[]
         {
