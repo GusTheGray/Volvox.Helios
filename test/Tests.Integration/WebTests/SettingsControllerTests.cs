@@ -28,6 +28,8 @@ namespace Tests.Integration.WebTests
 
             var respsonse = await client.GetAsync("/Settings");
 
+            var content = await respsonse.Content.ReadAsStringAsync();
+
             respsonse.EnsureSuccessStatusCode();
         }
 

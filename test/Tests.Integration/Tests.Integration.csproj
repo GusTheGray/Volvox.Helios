@@ -22,4 +22,8 @@
     <ProjectReference Include="..\..\src\Volvox.Helios.Web\Volvox.Helios.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\TestAuthentication\" />
+  </ItemGroup>
+
 </Project>

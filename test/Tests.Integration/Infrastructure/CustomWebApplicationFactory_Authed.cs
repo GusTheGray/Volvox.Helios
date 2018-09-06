@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,10 +24,8 @@ namespace Tests.Integration.Infrastructure
                 .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
-                services.AddAuthentication(options =>
-                {
-
-                });
+                //This might kind of work, but doesn't seem to actually work. Allows access to the page, but we're still unauthed.
+                //services.AddMvc(o => { o.Filters.Add(new AllowAnonymousFilter()); });
 
                 services.AddDbContext<VolvoxHeliosContext>(options =>
                 {
