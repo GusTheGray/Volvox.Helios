@@ -19,7 +19,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Volvox.Helios.Core.Bot;
 using Volvox.Helios.Core.Modules.Common;
+using Volvox.Helios.Core.Modules.DiscordFacing;
+using Volvox.Helios.Core.Modules.DiscordFacing.Commands;
+using Volvox.Helios.Core.Modules.DiscordFacing.Framework;
 using Volvox.Helios.Core.Modules.StreamAnnouncer;
+using Volvox.Helios.Core.Modules.StreamerRole;
 using Volvox.Helios.Core.Utilities;
 using Volvox.Helios.Service;
 using Volvox.Helios.Service.Clients;
@@ -104,11 +108,16 @@ namespace Volvox.Helios.Web
             services.AddSingleton<IBot, Bot>();
 
             // Modules
-            //services.AddSingleton<IModule, StreamerRoleModule>();
             services.AddSingleton<IModule, StreamAnnouncerModule>();
+            services.AddSingleton<IModule, StreamerRoleModule>();
+
+            // Commands
+            services.AddSingleton<IModule, CommandManager>();
+            services.AddSingleton<ICommand, HelpCommand>();
 
             // All Modules
             services.AddSingleton<IList<IModule>>(s => s.GetServices<IModule>().ToList());
+            services.AddSingleton<IList<ICommand>>(s => s.GetServices<ICommand>().ToList());
 
             // HTTP Clients
             services.AddHttpClient<DiscordAPIClient>(options =>
@@ -154,6 +163,8 @@ namespace Volvox.Helios.Web
                 app.UseExceptionHandler("/Error/Error");
                 app.UseStatusCodePagesWithReExecute("/Error/Errors/{0}");
                 app.UseHsts();
+
+                loggerFactory.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
             }
 
             app.UseHttpsRedirection();
@@ -161,8 +172,6 @@ namespace Volvox.Helios.Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
-            loggerFactory.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
 
             app.UseMvc(routes =>
             {

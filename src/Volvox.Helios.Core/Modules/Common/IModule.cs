@@ -10,7 +10,7 @@ namespace Volvox.Helios.Core.Modules.Common
     /// <summary>
     ///     Unit of the bot.
     /// </summary>
-    public interface IModule
+    public interface IModule : IDocumented
     {
         /// <summary>
         ///     Settings for Discord bot.
@@ -30,19 +30,19 @@ namespace Volvox.Helios.Core.Modules.Common
         /// <summary>
         ///     Initialize the module.
         /// </summary>
-        /// <param name="client">Client for the module to be registed to.</param>
+        /// <param name="client">Client for the module to be registered to.</param>
         Task Init(DiscordSocketClient client);
 
         /// <summary>
         ///     Start the module.
         /// </summary>
-        /// <param name="client">Client for the module to be registed to.</param>
+        /// <param name="client">Client for the module to be registered to.</param>
         Task Start(DiscordSocketClient client);
 
         /// <summary>
         ///     Execute the module.
         /// </summary>
-        /// <param name="client">Client for the module to be registed to.</param>
+        /// <param name="client">Client for the module to be registered to.</param>
         Task Execute(DiscordSocketClient client);
     }
 }
